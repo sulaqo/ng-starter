@@ -1,0 +1,24 @@
+machine:
+  ruby:
+    version: 2.3.0
+
+dependencies:
+  override:
+    - npm install
+    - gem install crowdin-cli
+    - crowdin-cli download
+  post:
+    - sudo pip install awscli
+    - aws configure set region eu-west-1
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run build:prod
+      - aws s3 sync --delete --acl public-read [PATH-TO-BINARIES] s3://[YOUR-BUCKET]/[BUILD-ID]/
+  development:
+    branch: develop
+    commands:
+      - npm run build:dev
+      - aws s3 sync --delete --acl public-read [PATH-TO-BINARIES] s3://[YOUR-BUCKET]/[BUILD-ID]/

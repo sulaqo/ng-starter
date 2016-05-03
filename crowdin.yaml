@@ -1,0 +1,15 @@
+api_key: <%= ENV['CROWDIN_API_KEY'] %>
+project_identifier: tw-business-reporting
+base_path: .
+preserve_hierarchy: false
+files:
+  -
+    source: /app/i18n/en.json
+    translation: /app/i18n/%two_letters_code%.%file_extension%
+    languages_mapping:
+      two_letters_code:
+        'es-ES': 'es'
+        'de-DE': 'de'
+        'en-US': 'en'
+        'en-GB': 'en'
+        'ko-KO': 'ko'
