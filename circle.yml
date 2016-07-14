@@ -1,0 +1,21 @@
+machine:
+  node:
+    version: 4.1.1
+
+dependencies:
+  override:
+    - npm install
+  post:
+    - npm install gulp -g
+    - sudo pip install awscli
+    - aws configure set region eu-west-1
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - gulp s3:publish --env production
+  staging:
+    branch: staging
+    commands:
+      - gulp s3:publish --env staging
