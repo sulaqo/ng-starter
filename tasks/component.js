@@ -6,10 +6,12 @@ import yargs from 'yargs';
 import template from 'gulp-template';
 import rename from 'gulp-rename';
 import lodash from 'lodash';
+import packageInfo from '../package.json';
+
 import {
   resolveToComponents,
   paths
-} from './paths'
+} from './paths';
 
 let blankTemplates = path.join(__dirname, 'generator', 'component/**/*');
 
@@ -20,15 +22,15 @@ function cap(val) {
 gulp.task('component', () => {
   const name = yargs.argv.name;
   const parentPath = yargs.argv.parent || '';
+  const rootModuleName = lodash.kebabCase(packageInfo.name);
   const destPath = path.join(resolveToComponents(), parentPath, lodash.kebabCase(name));
-
 
   return gulp.src(blankTemplates)
     .pipe(template({
-      name: name
+      name: lodash.camelCase(name).replace(/\s/g,''),
+      rootModule: rootModuleName
     }))
     .pipe(rename((path) => {
-      console.log(path);
       path.basename = path.basename.replace('temp', lodash.kebabCase(name));
     }))
     .pipe(gulp.dest(destPath));

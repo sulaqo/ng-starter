@@ -1,16 +1,16 @@
-import <%= _.capitalize(name) %>Module from './<%= name %>'
-import <%= _.capitalize(name) %>Controller from './<%= name %>.controller';
-import <%= _.capitalize(name) %>Component from './<%= name %>.component';
-import <%= _.capitalize(name) %>Template from './<%= name %>.html';
+import <%= name %>Module from './<%= _.kebabCase(name) %>'
+import <%= name %>Controller from './<%= _.kebabCase(name) %>.controller';
+import <%= name %>Component from './<%= _.kebabCase(name) %>.component';
+import <%= name %>Template from './<%= _.kebabCase(name) %>.html';
 
-describe('<%= _.capitalize(name) %>', () => {
+describe('<%= name %>', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(<%= _.capitalize(name) %>Module.name));
+  beforeEach(window.module(<%= name %>Module.name));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new <%= _.capitalize(name) %>Controller();
+      return new <%= name %>Controller();
     };
   }));
 
@@ -30,16 +30,16 @@ describe('<%= _.capitalize(name) %>', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(<%= _.capitalize(name) %>Template).to.match(/{{\s?vm\.name\s?}}/g);
+      expect(<%= name %>Template).to.match(/{{\s?vm\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = <%= _.capitalize(name) %>Component;
+      let component = <%= name %>Component;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(<%= _.capitalize(name) %>Template);
+        expect(component.template).to.equal(<%= name %>Template);
       });
 
       it('uses `controllerAs` syntax', () => {
@@ -47,7 +47,7 @@ describe('<%= _.capitalize(name) %>', () => {
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(<%= _.capitalize(name) %>Controller);
+        expect(component.controller).to.equal(<%= name %>Controller);
       });
   });
 });

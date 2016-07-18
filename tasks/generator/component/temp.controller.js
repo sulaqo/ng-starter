@@ -1,7 +1,7 @@
-class <%= _.capitalize(name) %>Controller {
+class <%= name %>Controller {
   constructor() {
     this.name = '<%= name %>';
   }
 }
 
-export default <%= _.capitalize(name) %>Controller;
+export default <%= name %>Controller;
