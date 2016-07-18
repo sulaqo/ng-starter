@@ -23,7 +23,6 @@ module.exports = {
     {
       // 'jquery': 'jQuery',
       // 'angular': 'angular',
-      // 'underscore': '_',
       // 'angular-ui-router': "'ui.router'"
     }
   ],
@@ -57,6 +56,5 @@ module.exports = {
  'ng-browser-info',
  'log-it-down',
  'messageformat',
- 'underscore',
  'angular-file-upload-all';
  */

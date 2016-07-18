@@ -7,5 +7,5 @@ node_modules
 dist/
 /serve
 /index.html
-.awspublish-tw-wallet
+.awspublish-*
 dist
