@@ -2,7 +2,7 @@ import template from './app.html';
 import './app.less';
 
 let appComponent = {
-  template,
+  template: template,
   restrict: 'E'
 };
 

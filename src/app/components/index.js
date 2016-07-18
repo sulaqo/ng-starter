@@ -5,6 +5,6 @@ import helloWorld from './hello-world';
 
 let componentModule = angular.module(lodash.kebabCase(packageInfo.name) + '.components', [
   helloWorld,
-]).name;
+]);
 
-export default componentModule;
+export default componentModule.name;

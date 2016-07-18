@@ -1,8 +1,8 @@
-import template from './<%= _.kebabCase(name) %>.html';
-import controller from './<%= _.kebabCase(name) %>.controller';
-import './<%= _.kebabCase(name) %>.less';
+import template from './<%= kebabName %>.html';
+import controller from './<%= kebabName %>.controller';
+import './<%= kebabName %>.less';
 
-let <%= name %>Component = {
+let <%= pascalName %>Component = {
   restrict: 'E',
   bindings: {},
   template: template,
@@ -10,4 +10,4 @@ let <%= name %>Component = {
   controllerAs: 'vm'
 };
 
-export default <%= name %>Component.name;
+export default <%= pascalName %>Component;

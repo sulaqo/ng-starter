@@ -1,18 +1,16 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import <%= name %>Component from './<%= _.kebabCase(name) %>.component';
+import <%= pascalName %>Component from './<%= kebabName %>.component';
 
-let <%= name %>Module = angular.module('<%= rootModule %>.components.<%= _.kebabCase(name) %>', [
+let <%= camelName %>Module = angular.module('<%= rootModule %>.components.<%= kebabName %>', [
   uiRouter
 ])
-.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider.state('<%= name %>', {
-      url: '/<%= _.kebabCase(name) %>',
-      template: '<<%= _.kebabCase(name) %>></<%= _.kebabCase(name) %>>'
+.config(['$stateProvider', ($stateProvider) => {
+  $stateProvider.state('<%= camelName %>', {
+      url: '/<%= kebabName %>',
+      template: '<<%= kebabName %>></<%= kebabName %>>'
     });
 }])
-.component('<%= name %>', <%= name %>Component);
+.component('<%= camelName %>', <%= pascalName %>Component);
 
-export default <%= name %>Module;
+export default <%= camelName %>Module.name;

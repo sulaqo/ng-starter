@@ -1,7 +1,7 @@
-class <%= name %>Controller {
+class <%= pascalName %>Controller {
   constructor() {
-    this.name = '<%= name %>';
+    this.name = '<%= pascalName %>';
   }
 }
 
-export default <%= name %>Controller;
+export default <%= pascalName %>Controller;

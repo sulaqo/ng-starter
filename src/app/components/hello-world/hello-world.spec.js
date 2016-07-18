@@ -1,16 +1,16 @@
-import <%= pascalName %>Module from './<%= kebabName %>'
-import <%= pascalName %>Controller from './<%= kebabName %>.controller';
-import <%= pascalName %>Component from './<%= kebabName %>.component';
-import <%= pascalName %>Template from './<%= kebabName %>.html';
+import HelloWorldModule from './hello-world'
+import HelloWorldController from './hello-world.controller';
+import HelloWorldComponent from './hello-world.component';
+import HelloWorldTemplate from './hello-world.html';
 
-describe('<%= camelName %>', () => {
+describe('helloWorld', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(<%= pascalName %>Module.name));
+  beforeEach(window.module(HelloWorldModule.name));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new <%= pascalName %>Controller();
+      return new HelloWorldController();
     };
   }));
 
@@ -30,16 +30,16 @@ describe('<%= camelName %>', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(<%= pascalName %>Template).to.match(/{{\s?vm\.name\s?}}/g);
+      expect(HelloWorldTemplate).to.match(/{{\s?vm\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = <%= pascalName %>Component;
+      let component = HelloWorldComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(<%= pascalName %>Template);
+        expect(component.template).to.equal(HelloWorldTemplate);
       });
 
       it('uses `controllerAs` syntax', () => {
@@ -47,7 +47,7 @@ describe('<%= camelName %>', () => {
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(<%= pascalName %>Controller);
+        expect(component.controller).to.equal(HelloWorldController);
       });
   });
 });

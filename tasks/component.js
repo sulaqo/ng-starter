@@ -27,7 +27,9 @@ gulp.task('component', () => {
 
   return gulp.src(blankTemplates)
     .pipe(template({
-      name: lodash.camelCase(name).replace(/\s/g,''),
+      pascalName: lodash.upperFirst(name).replace(/\s/g,''),
+      camelName: lodash.camelCase(name).replace(/\s/g,''),
+      kebabName: lodash.kebabCase(name).replace(/\s/g,''),
       rootModule: rootModuleName
     }))
     .pipe(rename((path) => {

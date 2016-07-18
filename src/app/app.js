@@ -12,12 +12,14 @@ angular.module(lodash.kebabCase(packageInfo.name), [
     uiRouter,
     Components
   ])
-  .config(($locationProvider, $httpProvider, $sceDelegateProvider) => {
+  .config(($locationProvider, $httpProvider, $sceDelegateProvider, $urlRouterProvider) => {
     'ngInject';
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     enableHtml5();
     setupHttpToAllowCors();
+
+    $urlRouterProvider.otherwise('/');
 
     function enableHtml5() {
       $locationProvider.html5Mode(true).hashPrefix('!');
