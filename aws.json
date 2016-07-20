@@ -1,20 +1,20 @@
 {
   "s3": {
-    "development": {
+    "dev": {
       "params": {
         "Bucket": "tw-fe-assets-dev",
         "region": "eu-west-1",
         "sslEnabled": true
       }
     },
-    "staging": {
+    "stage": {
       "params": {
         "Bucket": "tw-fe-assets-stage",
         "region": "eu-west-1",
         "sslEnabled": true
       }
     },
-    "production": {
+    "prod": {
       "params": {
         "Bucket": "tw-fe-assets-apps",
         "region": "eu-west-1",

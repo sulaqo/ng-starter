@@ -60,9 +60,14 @@ gulp.task('s3:upload', function() {
 function setupPublisher() {
   verifyEnvironment();
   ENVIRONMENT = argv.env;
-  AWS.config.update(awsInfo.s3[ENVIRONMENT]);
-  publisher = awspublish.create(awsSettings);
+  var credentials = new AWS.SharedIniFileCredentials({profile: process.env.AWS_PROFILE});
+  AWS.config.credentials = credentials;
+  var awsSettings = awsInfo.s3[ENVIRONMENT];
+  AWS.config.update(awsSettings);
   ROOT_FOLDER = packageInfo.name;
+  awsSettings.rootFolder = ROOT_FOLDER;
+  publisher = awspublish.create(awsSettings);
+
 }
 
 function resolveToDist(glob = '') {
