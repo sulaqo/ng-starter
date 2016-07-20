@@ -1,6 +1,6 @@
-const PRODUCTION = 'production';
-const STAGING = 'staging';
-const DEVELOPMENT = 'development';
+const PRODUCTION = 'prod';
+const STAGING = 'stage';
+const DEVELOPMENT = 'dev';
 
 let allEnvironments = [PRODUCTION, STAGING, DEVELOPMENT];
 

@@ -33,25 +33,36 @@ In principle you don't need Gulp if you're using Webpack but, since we are not d
 * Generating boilerplate for the Angular app
 
 ## File Structure
-We use a componentized approach with NG6. This will be the eventual standard (and particularly helpful, if using Angular's new router) as well as a great way to ensure a tasteful transition to Angular 2,
-when the time is ripe. Everything--or mostly everything, as we'll explore (below)--is a component. A component is a self-contained concern--may it be a feature or strictly-defined,
-ever-present element of the UI (such as a header, sidebar, or footer). Also characteristic of a component is that it harnesses its own stylesheets, templates, controllers, routes, services, and specs.
+
+We use a componentized approach with NG6.
+This will be the eventual standard (and particularly helpful, if using Angular's new router) as well as a great way to ensure a tasteful transition to Angular 2, when the time is ripe.
+Everything--or mostly everything, as we'll explore (below)--is a component.
+A component is a self-contained concern--may it be a feature or strictly-defined,
+ever-present element of the UI (such as a header, sidebar, or footer).
+Also characteristic of a component is that it harnesses its own stylesheets, templates, controllers, routes, services, and specs.
 This encapsulation allows us the comfort of isolation and structural locality. Here's how it looks:
 
 ```
-client
-⋅⋅app/
-⋅⋅⋅⋅app.js * app entry file
-⋅⋅⋅⋅common/ * functionality pertinent to several components propagate into this directory
-⋅⋅⋅⋅components/ * where components live
-⋅⋅⋅⋅⋅⋅components.js * components entry file
-⋅⋅⋅⋅⋅⋅home/ * home component
-⋅⋅⋅⋅⋅⋅⋅⋅index.js * home entry file (routes, configurations, and declarations occur here)
-⋅⋅⋅⋅⋅⋅⋅⋅dashboard.component.js * home "directive"
-⋅⋅⋅⋅⋅⋅⋅⋅dashboard.controller.js * home controller
-⋅⋅⋅⋅⋅⋅⋅⋅home.less * home styles
-⋅⋅⋅⋅⋅⋅⋅⋅home.html * home template
-⋅⋅⋅⋅⋅⋅⋅⋅dashboard.spec.js * home specs (for entry, component, and controller)
++-- src/
+  |
+  +-- app/
+     |
+     +-- app.js * app entry file
+     +-- common/ * functionality pertinent to several components propagate into this directory
+     |    |
+     |    +-- (tbd) * services, ui-primitives, etc. ...
+     |
+     +-- components/ * where components live
+         |
+         +-- index.js * components entry file
+         +-- hello-world/ * home component
+             |
+             +-- index.js * home entry file (routes, configurations, and declarations occur here)
+             +-- hello-world.component.js * hello-world "directive"
+             +-- hello-world.controller.js * hello-world controller
+             +-- hello-world.less * hello-world styles
+             +-- hello-world.html * hello-world view template
+             +-- hello-world.spec.js * hello-world specs (for entry, component, and controller)
 ```
 
 ## Testing Setup
@@ -78,16 +89,45 @@ Once you have these, install the following as globals:
 NG6 uses Gulp to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `gulp` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
 
 ### Gulp Tasks
+
 Here's a list of available tasks:
 
-* `build | build:production | build:staging`
-  * runs Webpack, which will transpile, concatenate, and compress (collectively, "bundle") all assets and modules into `dist/bundle.js`. It also prepares `index.html` to be used as application entry point, links assets and created dist version of our application.
-* `serve | serve:production | serve:staging`
+* `build [--env dev]| build --env prod | build --env stage` - DONE
+  * runs Webpack, which will transpile, concatenate, and compress (collectively, "bundle") all assets and modules into `dist/app.bundle.js`. It also prepares `index.html` to be used as application entry point, links assets and created dist version of our application.
+* `serve [--env dev] | serve --env prod` - DONE
   * starts a dev server via `webpack-dev-server`, serving the client folder.
 * `default` (which is the default task that runs when typing `gulp` without providing an argument)
 	* runs `serve`.
-* `component`
+* `component` - DONE
     * scaffolds a new Angular component. [Read below](#generating-components) for usage details.
+* `deliver:s3 --env prod|dev` - TODO
+    * invokes on `build --env prod` to generate deliverables
+    * inside the given prod bucket (see `package.json`) creates a new folder with the folder name as the current git hash id (same as `git rev-parse HEAD`)
+    * if there are pending changes for the current git repo the s3:upload aborts.
+    * in prod mode this task is available only from CI since the production bucket is available to write only with the CI credentials
+    * items will get uploaded with cache headers set to: 'Cache-Control': 'max-age=315360000, public'
+    * for dev env:
+      * this task is available from anywhere as long as you have AWS credentials to access the dev bucket
+
+
+**IMPORTANT:**
+The tasks available here are only about generating a binary.
+There is no rollback task because it basically consists in calling `s3:publish:prod --id [previous-release-git-id]`**
+
+### Routing
+
+Routes are stored at:
+```
+-- src/
+    |
+    +-- app/
+        |
+        +-- app.routes.js
+```
+
+Routes should stick together since they define only what components are top level components and also because they define the entire URL ecosystem for an app.
+This avoids possible collisions if we were to inverse the url/state declaration to components.
+For routing angular-ui-router is used currently.
 
 ### Testing
 To run the tests, run `npm test` or `karma start`.
@@ -100,13 +140,14 @@ Be sure to define your `*.spec.js` files within their corresponding component di
 ### Generating Components
 Following a consistent directory structure between components offers us the certainty of predictability. We can take advantage of this certainty by creating a gulp task to automate the "instantiation" of our components. The component boilerplate task generates this:
 ```
-⋅⋅⋅⋅⋅⋅componentName/
-⋅⋅⋅⋅⋅⋅⋅⋅componentName.js // entry file where all its dependencies load
-⋅⋅⋅⋅⋅⋅⋅⋅componentName.component.js
-⋅⋅⋅⋅⋅⋅⋅⋅componentName.controller.js
-⋅⋅⋅⋅⋅⋅⋅⋅componentName.html
-⋅⋅⋅⋅⋅⋅⋅⋅componentName.less // scoped to affect only its own template
-⋅⋅⋅⋅⋅⋅⋅⋅componentName.spec.js // contains passing demonstration tests
+-- component-name/
+    |
+    +-- index.js // entry file where all its dependencies load
+    +-- component-name.component.js
+    +-- component-name.controller.js
+    +-- component-name.html
+    +-- component-name.less // scoped to affect only its own template
+    +-- component-name.spec.js // contains passing demonstration tests
 ```
 
 You may, of course, create these files manually, every time a new module is needed, but that gets quickly tedious.
@@ -114,13 +155,19 @@ To generate a component, run `gulp component --name componentName`.
 
 The parameter following the `--name` flag is the name of the component to be created. Ensure that it is unique or it will overwrite the preexisting identically-named component.
 
-The component will be created, by default, inside `client/app/components`. To change this, apply the `--parent` flag, followed by a path relative to `client/app/components/`.
+The component will be created, by default, inside `src/app/components`. To change this, apply the `--parent` flag, followed by a path relative to `src/app/components/`.
 
-For example, running `gulp component --name signup --parent auth` will create a `signup` component at `client/app/components/auth/signup`.  
+For example, running `gulp component --name signup --parent auth` will create a `signup` component at `src/app/components/auth/signup`.  
 
 Running `gulp component --name footer --parent ../common` creates a `footer` component at `client/app/common/footer`.  
 
-Because the argument to `--name` applies to the folder name **and** the actual component name, make sure to camelcase the component names.
+Because the argument to `--name` applies to the the actual component name, make sure to camelcase the component names.
+
+**IMPORTANT:**
+Although components are camelcase, since unix systems are case sensitive for paths whereas windows systems are not we will stick with one convention:
+ * all paths are lower kebab case
+   * i.e. componentName -> component-name
+   * someReallyLongComponentName -> some-really-long-component-name
 
 ___
 

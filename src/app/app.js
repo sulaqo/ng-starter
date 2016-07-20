@@ -3,6 +3,7 @@ import uiRouter from 'angular-ui-router';
 import angularComponent from 'angular-component';
 import bootstrapJs from '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import AppComponent from './app.component';
+import routes from './app.routes';
 import packageInfo from '../../package.json';
 import Components from './components';
 import lodash from 'lodash';
@@ -12,14 +13,19 @@ angular.module(lodash.kebabCase(packageInfo.name), [
     uiRouter,
     Components
   ])
+  .config(($stateProvider, $urlRouterProvider) => {
+    'ngInject';
+    $urlRouterProvider.otherwise('/');
+    for (var [state, definition] of routes) {
+      $stateProvider.state(state, definition);
+    }
+  })
   .config(($locationProvider, $httpProvider, $sceDelegateProvider, $urlRouterProvider) => {
     'ngInject';
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     enableHtml5();
     setupHttpToAllowCors();
-
-    $urlRouterProvider.otherwise('/');
 
     function enableHtml5() {
       $locationProvider.html5Mode(true).hashPrefix('!');
