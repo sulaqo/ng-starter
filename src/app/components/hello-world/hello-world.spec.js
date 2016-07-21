@@ -1,4 +1,4 @@
-import HelloWorldModule from './hello-world'
+import HelloWorldModule from './index'
 import HelloWorldController from './hello-world.controller';
 import HelloWorldComponent from './hello-world.component';
 import HelloWorldTemplate from './hello-world.html';
@@ -6,7 +6,7 @@ import HelloWorldTemplate from './hello-world.html';
 describe('helloWorld', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(HelloWorldModule.name));
+  beforeEach(window.module(helloWorldModule.name));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {

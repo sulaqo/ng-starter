@@ -1,4 +1,4 @@
-import <%= pascalName %>Module from './<%= kebabName %>'
+import <%= pascalName %>Module from './index'
 import <%= pascalName %>Controller from './<%= kebabName %>.controller';
 import <%= pascalName %>Component from './<%= kebabName %>.component';
 import <%= pascalName %>Template from './<%= kebabName %>.html';
@@ -6,7 +6,7 @@ import <%= pascalName %>Template from './<%= kebabName %>.html';
 describe('<%= camelName %>', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(<%= pascalName %>Module.name));
+  beforeEach(window.module(<%= camelName %>Module.name));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {

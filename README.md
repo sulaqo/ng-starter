@@ -164,10 +164,38 @@ Running `gulp component --name footer --parent ../common` creates a `footer` com
 Because the argument to `--name` applies to the the actual component name, make sure to camelcase the component names.
 
 **IMPORTANT:**
-Although components are camelcase, since unix systems are case sensitive for paths whereas windows systems are not we will stick with one convention:
+Although components are camelcase, since unix systems are case sensitive for paths, whereas windows systems are not, we will stick with one convention:
  * all paths are lower kebab case
    * i.e. componentName -> component-name
    * someReallyLongComponentName -> some-really-long-component-name
+
+## AWS S3
+
+In order to store your credentials safely please read the information [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html).
+In principle you need a file at `~/.aws/credentials`.
+The file content looks like an INI file:
+```
+[default]
+aws_access_key_id = <YOUR_ACCESS_KEY_ID>
+aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
+```
+
+Inside the shared credentials file you can have multiple profiles like so:
+```
+[default]
+aws_access_key_id = <YOUR_ACCESS_KEY_ID>
+aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
+
+[john.doe]
+aws_access_key_id = <JOHN_DOE_ACCESS_KEY_ID>
+aws_secret_access_key = <JOHN_DOE_SECRET_ACCESS_KEY>
+```
+That means that when you want to use a specific credential you will have to provide it via environment variable:
+```bash
+$ AWS_PROFILE=john.doe gulp s3:deliver --env dev
+```
+
+Onwards!
 
 ___
 
