@@ -6,7 +6,7 @@ let HelloWorldComponent = {
   restrict: 'E',
   bindings: {},
   template: template,
-  controller: [controller],
+  controller: controller,
   controllerAs: 'vm'
 };
 

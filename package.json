@@ -14,11 +14,12 @@
     "angular-sanitize": "^1.5.7",
     "angular-translate": "^2.11.0",
     "angular-ui-router": "^0.3.1",
-    "bootstrap": "git@github.com:transferwise/bootstrap.git#v4.0.0",
+    "bootstrap": "git+ssh://git@github.com:transferwise/bootstrap.git#v4.0.0",
     "es5-shim": "^4.5.9",
     "jquery": "^3.1.0",
     "lodash": "^4.13.1",
-    "styleguide-components": "git@github.com:transferwise/styleguide-components.git"
+    "styleguide-components": "git+ssh://git@github.com:transferwise/styleguide-components.git",
+    "tw-frontend": "git+ssh://git@github.com:transferwise/frontend-apps.git#test-frontend-modules"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0",

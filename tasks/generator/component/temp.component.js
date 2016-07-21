@@ -6,7 +6,7 @@ let <%= pascalName %>Component = {
   restrict: 'E',
   bindings: {},
   template: template,
-  controller: [controller],
+  controller: controller,
   controllerAs: 'vm'
 };
 
