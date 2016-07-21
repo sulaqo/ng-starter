@@ -9,7 +9,9 @@
     * [Running the App](#running-the-app)
         * [Gulp Tasks](#gulp-tasks)
         * [Testing](#testing)
-		* [Generating Components](#generating-components)		
+		* [Generating Components](#generating-components)
+  		* [Component flow](#component-flow)
+		* [AWS S3](#aws-s3)
 * [Starter Kit Support and Questions](#starter-kit-support-and-questions)
 
 # Walkthrough
