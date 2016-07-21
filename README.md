@@ -79,10 +79,11 @@ To run tests, type `npm test` or `karma start` in the terminal. Read more about 
 Tools needed to run this app:
 * `node` and `npm`
 Once you have these, install the following as globals:  
-`npm install -g gulp karma karma-cli webpack`
+```
+$ npm install -g gulp karma karma-cli webpack
+```
 
 ## Installing
-* `npm install -g gulp karma karma-cli webpack` install global cli dependencies
 * `npm install` to install dependencies
 
 ## Running the App
@@ -138,7 +139,11 @@ Be sure to define your `*.spec.js` files within their corresponding component di
 `Mocha` is the testing suite and `Chai` is the assertion library. If you would like to change this, see `karma.conf.js`.
 
 ### Generating Components
-Following a consistent directory structure between components offers us the certainty of predictability. We can take advantage of this certainty by creating a gulp task to automate the "instantiation" of our components. The component boilerplate task generates this:
+
+Following a consistent directory structure between components offers us the certainty of predictability.
+We can take advantage of this certainty by creating a gulp task to automate the "instantiation" of our components.
+The component boilerplate task generates this:
+
 ```
 -- component-name/
     |
@@ -168,6 +173,123 @@ Although components are camelcase, since unix systems are case sensitive for pat
  * all paths are lower kebab case
    * i.e. componentName -> component-name
    * someReallyLongComponentName -> some-really-long-component-name
+
+#### Component flow
+
+The most basic creation of a component is done this way:
+```
+$ gulp component --name johnDoe
+```
+
+This will generate the following structure:
+
+```bash
++-- src/
+  |
+  +-- app/
+     |
+     +-- components/
+         |
+         +-- john-doe/
+             |
+             +-- index.js
+             +-- john-doe.component.js
+             +-- john-doe.controller.js
+             +-- john-doe.less
+             +-- john-doe.html
+             +-- john-doe.spec.js
+```
+
+Open with your editor the john-doe view:
+```bash
+$ vim ./src/app/components/john-doe/john-doe.html
+```
+
+Inside the file add ng bound object like so:
+
+```html
+<div class="some-object" ng-click="vm.onSomeObjectAreaClick()">{{ vm.someObjectText }}</div>
+```
+
+Let's add some size and color to the area.
+Edit component's style located at: `./src/app/components/john-doe/john-doe.less`
+
+```bash
+$ vim ./src/app/components/john-doe/john-doe.less
+```
+
+Like so (ugly colors, but effective for ):
+```css
+.some-object{
+  height:200px;
+  width: 200px;
+  background-color: red;
+  color: green;
+  text-align: center;
+}
+```
+
+
+Edit john-doe controller and initialize `someObjectText` with "Some text" and define the `onSomeObjectAreaClick()` method/function.
+
+```js
+class JohnDoeController {
+  constructor($window, $log) {
+    this.name = 'JohnDoe';
+    this.window = $window;
+    this.logger = $log;
+    this.someObjectText = 'Some text';
+  }
+
+  onSomeObjectAreaClick(){
+    this.window.alert('This is an alert');
+  }
+}
+```
+
+Edit the components index located at `./src/app/components/index.js`
+
+```bash
+$ vim ./src/app/components/index.js
+```
+
+Import and append the johnDoe component to the components index:
+
+```js
+import and append johnDoe component to the module:
+import angular from 'angular';
+import packageInfo from '../../../package.json';
+import lodash from 'lodash';
+import helloWorld from './hello-world';
+import johnDoe from './john-doe';
+
+
+let componentModule = angular.module(lodash.kebabCase(packageInfo.name) + '.components', [
+  helloWorld,
+  johnDoe
+]);
+
+export default componentModule.name;
+```
+
+Now let's embed johnDoe component inside helloWorld.
+Open hello world view and just add somewhere inside the view the new johnDoe component:
+
+```html
+<john-doe></john-doe>
+```
+
+Now run gulp:
+```
+$ gulp
+```
+
+And hit [https://localhost:3000/hello-world](https://localhost:3000/hello-world) in your browser.
+
+Et voila!
+
+Now it's your task to add the component as a high level route (**hint: app.routes.js**).
+
 
 ## AWS S3
 
