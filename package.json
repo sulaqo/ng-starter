@@ -57,7 +57,6 @@
     "karma-webpack": "^1.5.1",
     "less": "^2.6.1",
     "less-loader": "^2.2.3",
-    "lodash": "^4.13.1",
     "mocha": "^2.3.0",
     "moment": "^2.13.0",
     "ng-annotate-loader": "0.0.10",
