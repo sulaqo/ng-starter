@@ -296,6 +296,22 @@ Now it's your task to add the component as a high level route (**hint: app.route
 ## AWS S3
 
 In order to store your credentials safely please read the information [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html).
+
+Since the deployment mechanism uses CircleCI we need a way to share the AWS credentials with it.
+
+The solution is simple as we will use env variables for it:
+
+```
+$ export AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY_ID>
+
+$ export AWS_SECRET_ACCESS_KEY=<YOUR_AWS_SECRET_ACCESS_KEY>
+
+```
+
+Beware that your credentials will not allow pushing to production only to dev bucket.
+
+On you local dev environment however you can use the shared credentials approach.
+
 In principle you need a file at `~/.aws/credentials`.
 The file content looks like an INI file:
 ```

@@ -60,8 +60,11 @@ gulp.task('s3:upload', function() {
 function setupPublisher() {
   verifyEnvironment();
   ENVIRONMENT = argv.env;
-  var credentials = new AWS.SharedIniFileCredentials({profile: process.env.AWS_PROFILE});
-  AWS.config.credentials = credentials;
+  if(!(process.env.AWS_SECRET_ACCESS_KEY && process.env.AWS_ACCESS_KEY_ID)){
+    // if we don't have the env variables we'll use the shared credentials file
+    var credentials = new AWS.SharedIniFileCredentials({profile: process.env.AWS_PROFILE});
+    AWS.config.credentials = credentials;
+  }
   var awsSettings = awsInfo.s3[ENVIRONMENT];
   AWS.config.update(awsSettings);
   ROOT_FOLDER = packageInfo.name;
