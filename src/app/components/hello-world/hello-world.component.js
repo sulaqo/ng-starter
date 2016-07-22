@@ -2,7 +2,7 @@ import template from './hello-world.html';
 import controller from './hello-world.controller';
 import './hello-world.less';
 
-let HelloWorldComponent = {
+let helloWorldComponent = {
   restrict: 'E',
   bindings: {},
   template: template,
@@ -10,4 +10,4 @@ let HelloWorldComponent = {
   controllerAs: 'vm'
 };
 
-export default HelloWorldComponent;
+export default helloWorldComponent;

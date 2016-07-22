@@ -2,7 +2,7 @@ import template from './<%= kebabName %>.html';
 import controller from './<%= kebabName %>.controller';
 import './<%= kebabName %>.less';
 
-let <%= pascalName %>Component = {
+let <%= camelName %>Component = {
   restrict: 'E',
   bindings: {},
   template: template,
@@ -10,4 +10,4 @@ let <%= pascalName %>Component = {
   controllerAs: 'vm'
 };
 
-export default <%= pascalName %>Component;
+export default <%= camelName %>Component;

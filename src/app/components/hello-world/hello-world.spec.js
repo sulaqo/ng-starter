@@ -1,7 +1,7 @@
-import HelloWorldModule from './index'
-import HelloWorldController from './hello-world.controller';
-import HelloWorldComponent from './hello-world.component';
-import HelloWorldTemplate from './hello-world.html';
+import helloWorldModule from './index'
+import helloWorldController from './hello-world.controller';
+import helloWorldComponent from './hello-world.component';
+import helloWorldTemplate from './hello-world.html';
 
 describe('helloWorld', () => {
   let $rootScope, makeController;
@@ -10,7 +10,7 @@ describe('helloWorld', () => {
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new HelloWorldController();
+      return new helloWorldController();
     };
   }));
 
@@ -30,16 +30,16 @@ describe('helloWorld', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(HelloWorldTemplate).to.match(/{{\s?vm\.name\s?}}/g);
+      expect(helloWorldTemplate).to.match(/{{\s?vm\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = HelloWorldComponent;
+      let component = helloWorldComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(HelloWorldTemplate);
+        expect(component.template).to.equal(helloWorldTemplate);
       });
 
       it('uses `controllerAs` syntax', () => {
@@ -47,7 +47,7 @@ describe('helloWorld', () => {
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(HelloWorldController);
+        expect(component.controller).to.equal(helloWorldController);
       });
   });
 });

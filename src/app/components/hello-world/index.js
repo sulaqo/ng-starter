@@ -1,9 +1,9 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import HelloWorldComponent from './hello-world.component';
+import helloWorldComponent from './hello-world.component';
 
 let helloWorldModule = angular
   .module('ng-starter.components.hello-world', [])
-  .component('helloWorld', HelloWorldComponent);
+  .component('helloWorld', helloWorldComponent);
 
-export default helloWorldModule.name;
+export default helloWorldModule;

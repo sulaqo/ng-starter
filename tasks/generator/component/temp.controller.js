@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-class <%= pascalName %>Controller {
+class <%= camelName %>Controller {
   constructor($window, $log) {
-    this.name = '<%= pascalName %>';
+    this.name = '<%= camelName %>';
     this.window = $window;
     this.logger = $log;
   }
@@ -13,6 +13,6 @@ class <%= pascalName %>Controller {
   }
 }
 
-<%= pascalName %>Controller.$inject = ['$window', '$log'];
+<%= camelName %>Controller.$inject = ['$window', '$log'];
 
-export default <%= pascalName %>Controller;
+export default <%= camelName %>Controller;

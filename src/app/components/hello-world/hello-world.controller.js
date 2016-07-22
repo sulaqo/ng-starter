@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-class HelloWorldController {
+class helloWorldController {
   constructor($window, $log) {
-    this.name = 'HelloWorld';
+    this.name = 'helloWorld';
     this.window = $window;
     this.logger = $log;
   }
@@ -13,6 +13,6 @@ class HelloWorldController {
   }
 }
 
-HelloWorldController.$inject = ['$window', '$log'];
+helloWorldController.$inject = ['$window', '$log'];
 
-export default HelloWorldController;
+export default helloWorldController;
