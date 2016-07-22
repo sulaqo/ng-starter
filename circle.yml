@@ -15,8 +15,8 @@ deployment:
   production:
     branch: master
     commands:
-      - gulp s3:deliver --env prod
+      - gulp s3:deploy --env prod
   staging:
     branch: staging
     commands:
-      - gulp s3:deliver --env staging
+      - gulp s3:deploy --env stahe

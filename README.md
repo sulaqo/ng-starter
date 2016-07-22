@@ -101,11 +101,11 @@ Here's a list of available tasks:
   * starts a dev server via `webpack-dev-server`, serving the client folder.
 * `default` (which is the default task that runs when typing `gulp` without providing an argument)
 	* runs `serve`.
-* `component` - DONE
+* `component`
     * scaffolds a new Angular component. [Read below](#generating-components) for usage details.
-* `deliver:s3 --env prod|dev` - TODO
+* `s3:deploy --env prod|dev`
     * invokes on `build --env prod` to generate deliverables
-    * inside the given prod bucket (see `package.json`) creates a new folder with the folder name as the current git hash id (same as `git rev-parse HEAD`)
+    * inside the given prod bucket (see `aws.json`) creates a new folder with the folder name as the current git hash id (same as `git rev-parse HEAD`)
     * if there are pending changes for the current git repo the s3:upload aborts.
     * in prod mode this task is available only from CI since the production bucket is available to write only with the CI credentials
     * items will get uploaded with cache headers set to: 'Cache-Control': 'max-age=315360000, public'
