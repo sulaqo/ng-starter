@@ -30,7 +30,7 @@ var ROOT_FOLDER;
 var ENVIRONMENT;
 let DEPLOYMENT_ID = git.long();
 
-gulp.task('s3:deliver', (done) => {
+gulp.task('s3:deploy', (done) => {
   // so, publishing goes only from CI
   setupPublisher();
   runSequence('build', 's3:upload', done);
