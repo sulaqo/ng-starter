@@ -262,13 +262,13 @@ import and append johnDoe component to the module:
 import angular from 'angular';
 import packageInfo from '../../../package.json';
 import lodash from 'lodash';
-import helloWorld from './hello-world';
-import johnDoe from './john-doe';
+import helloWorldModule from './hello-world';
+import johnDoeModule from './john-doe';
 
 
 let componentModule = angular.module(lodash.kebabCase(packageInfo.name) + '.components', [
-  helloWorld,
-  johnDoe
+  helloWorldModule.name,
+  johnDoeModule.name
 ]);
 
 export default componentModule.name;
