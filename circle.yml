@@ -7,15 +7,16 @@ dependencies:
     - npm install
   post:
     - npm install gulp -g
-    - sudo pip install awscli
-    - aws configure set region eu-west-1
+test:
+  override:
+    - npm test
 
 deployment:
   production:
     branch: master
     commands:
-      - gulp s3:publish --env production
+      - gulp s3:deliver --env prod
   staging:
     branch: staging
     commands:
-      - gulp s3:publish --env staging
+      - gulp s3:deliver --env staging
