@@ -5,13 +5,15 @@ import bootstrapJs from '../../node_modules/bootstrap/dist/js/bootstrap.min';
 import AppComponent from './app.component';
 import routes from './app.routes';
 import packageInfo from '../../package.json';
-import Components from './components';
+import componentsModule from './components';
 import lodash from 'lodash';
+import commonModule from './common';
 
 
 angular.module(lodash.kebabCase(packageInfo.name), [
     uiRouter,
-    Components
+    componentsModule.name,
+    commonModule.name
   ])
   .config(($stateProvider, $urlRouterProvider) => {
     'ngInject';
