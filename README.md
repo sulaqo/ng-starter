@@ -337,6 +337,11 @@ $ AWS_PROFILE=john.doe gulp s3:deliver --env dev
 
 Onwards!
 
+
+# Deployment, publishing & delivery
+
+![Alt text](/assets/deploy-publish-deliver.png?raw=true "Deploy, publish & delivery")
+
 ___
 
 Generated using NG6 started project.
