@@ -37,6 +37,7 @@
     "git-rev-sync": "^1.5.1",
     "gulp": "^3.9.0",
     "gulp-awspublish": "^3.0.1",
+    "gulp-zip": "3.2.0",
     "gulp-clean": "^0.3.2",
     "gulp-filelist": "^0.4.0",
     "gulp-ng-constant": "^1.1.0",

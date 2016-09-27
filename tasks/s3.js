@@ -33,7 +33,7 @@ let DEPLOYMENT_ID = git.long();
 gulp.task('s3:deploy', (done) => {
   // so, publishing goes only from CI
   setupPublisher();
-  runSequence('build', 's3:upload', done);
+  runSequence('build', 's3:upload', 'artifact:zip', done);
 });
 
 

@@ -19,7 +19,11 @@ deployment:
     branch: master
     commands:
       - gulp s3:deploy --env prod
+      - mkdir $CIRCLE_ARTIFACTS/prod/
+      - mv artifacts/*.zip $CIRCLE_ARTIFACTS/prod/
   staging:
     branch: staging
     commands:
       - gulp s3:deploy --env stage
+      - mkdir $CIRCLE_ARTIFACTS/stage/
+      - mv artifacts/*.zip $CIRCLE_ARTIFACTS/stage/
